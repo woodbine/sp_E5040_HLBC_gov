@@ -6,8 +6,8 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 # Set up variables
-entity_id = "E5014_HAFLBC_gov"
-url = "http://www.spotlightonspend.org.uk/317/London+Borough+of+Hammersmith+and+Fulham/Downloads"
+entity_id = "E5040_HLBC_gov"
+url = "http://www.havering.gov.uk/Pages/ServiceChild/Publication-of-spend-over-500.aspx"
 # Set up functions
 def convert_mth_strings ( mth_string ):
 	month_numbers = {'JAN': '01', 'FEB': '02', 'MAR':'03', 'APR':'04', 'MAY':'05', 'JUN':'06', 'JUL':'07', 'AUG':'08', 'SEP':'09','OCT':'10','NOV':'11','DEC':'12' }
@@ -22,13 +22,12 @@ html = urllib2.urlopen(url)
 soup = BeautifulSoup(html)
 
 # find all entries with the required class
-links = soup.findAll('a',{'class':'treeMonthlyFiles_0'})
+links = soup.findAll('a',href=True)
 
 for link in links:
 	url = link['href']
-	if 'javascript:fnRequestFile' in url:
-		url = url.replace("javascript:fnRequestFile('","")
-		url = url.replace("');","")
+	if 'SPEND' in url.upper():
+		url = 'http://www.havering.gov.uk'+url
 		title = link.contents[0]
 		# create the right strings for the new filename
 		csvYr = title.split(' ')[1]
