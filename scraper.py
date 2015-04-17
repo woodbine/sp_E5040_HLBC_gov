@@ -29,7 +29,7 @@ for link in links:
 	if '/Documents/Council-democracy-elections/Open-Council/' in url:
 		if '.csv' in url:
 			url = 'http://www.havering.gov.uk'+url
-			title = unicode(link.contents[0])
+			title = link.contents[0].encode('ascii', 'ignore')
 			print title
 			# create the right strings for the new filename
 			csvYr = title.split(' ')[1]
