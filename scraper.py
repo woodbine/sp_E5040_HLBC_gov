@@ -29,6 +29,8 @@ for link in links:
 	if 'SPEND' in url.upper():
 		url = 'http://www.havering.gov.uk'+url
 		title = link.contents[0]
+		print title
+		'''
 		# create the right strings for the new filename
 		csvYr = title.split(' ')[1]
 		csvMth = title.split(' ')[0][:3]
@@ -38,4 +40,5 @@ for link in links:
 		todays_date = str(datetime.now())
 		scraperwiki.sqlite.save(unique_keys=['l'], data={"l": url, "f": filename, "d": todays_date })
 		print filename
+		'''
 
