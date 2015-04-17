@@ -27,7 +27,7 @@ links = soup.findAll('a',href=True)
 for link in links:
 	url = link['href']
 	if 'SPEND' in url.upper():
-		if 'CSV' in url.upper():
+		if '.csv' in url:
 			url = 'http://www.havering.gov.uk'+url
 			title = link.contents[0]
 			print title
