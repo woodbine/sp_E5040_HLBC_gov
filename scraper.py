@@ -26,19 +26,17 @@ links = soup.findAll('a',href=True)
 
 for link in links:
 	url = link['href']
-	if ('SPEND','CSV') in url.upper():
-		url = 'http://www.havering.gov.uk'+url
-		title = link.contents[0]
-		print title
-		'''
-		# create the right strings for the new filename
-		csvYr = title.split(' ')[1]
-		csvMth = title.split(' ')[0][:3]
-		csvMth = csvMth.upper()
-		csvMth = convert_mth_strings(csvMth);
-		filename = entity_id + "_" + csvYr + "_" + csvMth + ".csv"
-		todays_date = str(datetime.now())
-		scraperwiki.sqlite.save(unique_keys=['l'], data={"l": url, "f": filename, "d": todays_date })
-		print filename
-		'''
-
+	if 'SPEND' in url.upper():
+		if 'CSV' in url.upper():
+			url = 'http://www.havering.gov.uk'+url
+			title = link.contents[0]
+			print title
+			# create the right strings for the new filename
+			csvYr = title.split(' ')[1]
+			csvMth = title.split(' ')[0][:3]
+			csvMth = csvMth.upper()
+			csvMth = convert_mth_strings(csvMth);
+			filename = entity_id + "_" + csvYr + "_" + csvMth + ".csv"
+			todays_date = str(datetime.now())
+			scraperwiki.sqlite.save(unique_keys=['l'], data={"l": url, "f": filename, "d": todays_date })
+			print filename
