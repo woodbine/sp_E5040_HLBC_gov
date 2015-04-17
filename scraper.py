@@ -25,7 +25,7 @@ soup = BeautifulSoup(html)
 links = soup.findAll('a',href=True)
 
 for link in links:
-	print link.encode('ascii', 'ignore')
+	print link
 	url = link['href']
 	if '/Documents/Council-democracy-elections/Open-Council/' in url:
 		if '.csv' in url:
