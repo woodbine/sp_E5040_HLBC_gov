@@ -30,7 +30,9 @@ for link in links:
 		if '.csv' in url:
 			url = 'http://www.havering.gov.uk'+url
 			title = link.contents[0].encode('ascii', 'ignore')
-			if title and not title.isspace(): #  check the title isn't empty
+			if title == None: #  check the title is empty
+				print "no title found"
+			else:
 				# create the right strings for the new filename
 				csvYr = title.split(' ')[1]
 				csvMth = title.split(' ')[0][:3]
