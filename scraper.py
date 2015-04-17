@@ -30,7 +30,7 @@ for link in links:
 		if '.csv' in url:
 			url = 'http://www.havering.gov.uk'+url
 			title = link.contents[0]
-			print title[0:10]
+			print title[0:13]
 			# create the right strings for the new filename
 			csvYr = title.split(' ')[1]
 			csvMth = title.split(' ')[0][:3]
