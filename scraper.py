@@ -29,10 +29,10 @@ for link in links:
 	if '/Documents/Council-democracy-elections/Open-Council/' in url:
 		if '.csv' in url:
 			url = 'http://www.havering.gov.uk'+url
-			title = link.contents[0].encode('ascii', 'ignore')
-			if title == None: #  check the title is empty
+			if link.contents[0].encode('ascii', 'ignore') == None: #  check the title is empty
 				print "no title found"
 			else:
+				title = link.contents[0].encode('ascii', 'ignore')
 				# create the right strings for the new filename
 				csvYr = title.split(' ')[1]
 				csvMth = title.split(' ')[0][:3]
