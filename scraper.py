@@ -84,7 +84,7 @@ def convert_mth_strings ( mth_string ):
 #### VARIABLES 1.0
 
 entity_id = "E5040_HLBC_gov"
-url = "http://www.havering.gov.uk/Pages/ServiceChild/Publication-of-spend-over-500.aspx"
+url = "https://www.havering.gov.uk/Pages/ServiceChild/Publication-of-spend-over-500.aspx"
 errors = 0
 data = []
 
@@ -100,15 +100,18 @@ links = soup.findAll('a',href=True)
 
 for link in links:
     url = link['href']
-    if '/Documents/Council-democracy-elections/Open-Council/' in url:
+    if '/Documents/Council-democracy-elections/' in url:
         if '.csv' in url:
             url = 'http://www.havering.gov.uk'+url
-            if len(link.contents) > 0:
-                title = link.contents[0].encode('ascii', 'ignore')
-                csvYr = title.split(' ')[1]
-                csvMth = title.split(' ')[0][:3]
-                csvMth = convert_mth_strings(csvMth.upper())
-                data.append([csvYr, csvMth, url])
+            title = link.text.strip().split()
+            if title:
+                csvYr = title[1].strip().replace(u'\u200b', '')
+                csvMth = title[0].strip()[:3]
+            else:
+                continue
+            csvMth = convert_mth_strings(csvMth.upper())
+            data.append([csvYr, csvMth, url])
+
 
 #### STORE DATA 1.0
 
